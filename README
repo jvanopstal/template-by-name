@@ -1,6 +1,6 @@
 templatebyname Plugin for DokuWiki
 
-TestDescription
+Template plugin to couple page templates to file or directory names.
 
 All documentation for this plugin can be found at
 http://
