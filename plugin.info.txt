@@ -3,5 +3,5 @@ author Jan Van Opstal
 email  jvanopstal@mznl.be
 date   2012-04-25
 name   templatebyname plugin
-desc   TestDescription
+desc   Template plugin to couple page templates to file or directory names.
 url    http://www.mznl.be

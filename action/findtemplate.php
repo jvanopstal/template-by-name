@@ -48,8 +48,16 @@ class action_plugin_templatebyname_findtemplate extends DokuWiki_Action_Plugin {
 						$event->data['tplfile'] = $path.'/_template.txt';
 						break;
 					}
+					elseif($blnFirst == false && $blnFirstDir == true && @file_exists($path.'/*_'.$dir.'.txt') && noNS($event->data['id']) == 'start'){
+						$event->data['tplfile'] = $path.'/*_'.$dir.'.txt';
+						break;
+					}
 					elseif($blnFirst == false && $blnFirstDir == true && @file_exists($path.'/*'.$dir.'.txt')){
 						$event->data['tplfile'] = $path.'/*'.$dir.'.txt';
+						break;
+					}
+					elseif($blnFirst == false && @file_exists($path.'/**_'.$dir.'.txt') && noNS($event->data['id']) == 'start'){
+						$event->data['tplfile'] = $path.'/**_'.$dir.'.txt';
 						break;
 					}
 					elseif($blnFirst == false && @file_exists($path.'/**'.$dir.'.txt')){
