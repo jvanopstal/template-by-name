@@ -23,7 +23,7 @@ class action_plugin_templatebyname_findtemplate extends DokuWiki_Action_Plugin {
 
     }
 	
-	public function check_file_name($path, $subPrefix, $filename){
+	public function check_file_name($path, $subPrefix, $filename, $datadir){
 		$retValue = '';
 		if(@file_exists($path.'/'.$subPrefix.$filename.'.txt') && $this->getConf('allowlocal') == 1 && $this->getConf('allownoneditable') == 1){
 			$retValue = $path.'/'.$subPrefix.$filename.'.txt';
@@ -34,8 +34,8 @@ class action_plugin_templatebyname_findtemplate extends DokuWiki_Action_Plugin {
 		if(@file_exists($conf['datadir'].'/'.$this->getConf('otherlocation').'/'.$subPrefix.$filename.'.txt') && $this->getConf('allowmirror') == 1 && $this->getConf('allownoneditable') == 1){
 			$retValue = $conf['datadir'].'/'.$this->getConf('otherlocation').'/'.$subPrefix.$filename.'.txt';
 		}
-		if(@file_exists($conf['datadir'].'/'.$this->getConf('otherlocation').'/'.$this->getConf('editableprefix').$subPrefix.$filename.'.txt') && $this->getConf('allowmirror') == 1 && $this->getConf('alloweditable') == 1){
-			$retValue = $conf['datadir'].'/'.$this->getConf('otherlocation').'/'.$this->getConf('editableprefix').$subPrefix.$filename.'.txt';
+		if(@file_exists($datadir.'/'.$this->getConf('otherlocation').'/'.$this->getConf('editableprefix').$subPrefix.$filename.'.txt') && $this->getConf('allowmirror') == 1 && $this->getConf('alloweditable') == 1){
+			$retValue = $datadir.'/'.$this->getConf('otherlocation').'/'.$this->getConf('editableprefix').$subPrefix.$filename.'.txt';
 		}
 		
 		return $retValue;
@@ -54,35 +54,35 @@ class action_plugin_templatebyname_findtemplate extends DokuWiki_Action_Plugin {
 				$blnFirstDir = true;
 				$strTemp = '';
 				while (strLen($path) >= $len){
-					if($blnFirst == true && ($strTemp = $this->check_file_name($path,'_',noNS($event->data['id']))) != ''){
+					if($blnFirst == true && ($strTemp = $this->check_file_name($path,'_',noNS($event->data['id']),$conf['datadir'])) != ''){
 						$event->data['tplfile'] = $strTemp;
 						break;
 					}
-					elseif(($strTemp = $this->check_file_name($path,'__',noNS($event->data['id']))) != ''){
+					elseif(($strTemp = $this->check_file_name($path,'__',noNS($event->data['id']),$conf['datadir'])) != ''){
 						$event->data['tplfile'] = $strTemp;
 						break;
 					}
-					elseif($blnFirst == true && ($strTemp = $this->check_file_name($path,'_','template')) != ''){
+					elseif($blnFirst == true && ($strTemp = $this->check_file_name($path,'_','template',$conf['datadir'])) != ''){
 						$event->data['tplfile'] = $strTemp;
 						break;
 					}
-					elseif($blnFirst == false && $blnFirstDir == true && noNS($event->data['id']) == 'start' && ($strTemp = $this->check_file_name($path,'~_',$dir)) != ''){
+					elseif($blnFirst == false && $blnFirstDir == true && noNS($event->data['id']) == 'start' && ($strTemp = $this->check_file_name($path,'~_',$dir,$conf['datadir'])) != ''){
 						$event->data['tplfile'] = $strTemp;
 						break;
 					}
-					elseif($blnFirst == false && $blnFirstDir == true && ($strTemp = $this->check_file_name($path,'~',$dir)) != ''){
+					elseif($blnFirst == false && $blnFirstDir == true && ($strTemp = $this->check_file_name($path,'~',$dir,$conf['datadir'])) != ''){
 						$event->data['tplfile'] = $strTemp;
 						break;
 					}
-					elseif($blnFirst == false && noNS($event->data['id']) == 'start' && ($strTemp = $this->check_file_name($path,'~~',$dir)) != ''){
+					elseif($blnFirst == false && noNS($event->data['id']) == 'start' && ($strTemp = $this->check_file_name($path,'~~',$dir,$conf['datadir'])) != ''){
 						$event->data['tplfile'] = $strTemp;
 						break;
 					}
-					elseif($blnFirst == false && ($strTemp = $this->check_file_name($path,'~~',$dir)) != ''){
+					elseif($blnFirst == false && ($strTemp = $this->check_file_name($path,'~~',$dir,$conf['datadir'])) != ''){
 						$event->data['tplfile'] = $strTemp;
 						break;
 					}
-					elseif(($strTemp = $this->check_file_name($path,'__','template')) != ''){
+					elseif(($strTemp = $this->check_file_name($path,'__','template',$conf['datadir'])) != ''){
 						$event->data['tplfile'] = $strTemp;
 						break;
 					}
