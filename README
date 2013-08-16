@@ -3,7 +3,7 @@ templatebyname Plugin for DokuWiki
 Template plugin to couple page templates to file or directory names.
 
 All documentation for this plugin can be found at
-http://
+https://www.dokuwiki.org/plugin:templatebyname
 
 If you install this plugin manually, make sure it is installed in
 lib/plugins/templatebyname/ - if the folder is called different it
