@@ -2,6 +2,6 @@ base   templatebyname
 author Jan Van Opstal
 email  jvanopstal@mznl.be
 date   2021-02-24
-name   templatebyname plugin
+name   TemplateByName Plugin
 desc   Template plugin to couple page templates to file or directory names.
 url    https://www.dokuwiki.org/plugin:templatebyname
